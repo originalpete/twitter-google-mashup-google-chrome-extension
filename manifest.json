@@ -1,0 +1,16 @@
+{
+  "name": "Google + Twitter mashup",
+  "version": "1.1.0",
+  "description": "See Google and Twitter search results in the Google results screen",
+  "permissions": [
+    "http://search.twitter.com/*"
+  ],
+  "background_page" : "background.html",
+  "content_scripts": [
+    {
+      "matches": [ "http://*/*", "https://*/*" ],
+      "include_globs": [ "http://*.google.*/search\\?*" ],
+      "js" : ["jquery.min.js", "script.js"]
+    }
+  ]
+}

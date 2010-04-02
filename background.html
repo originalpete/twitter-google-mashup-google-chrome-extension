@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <script>
+      
+      // twitter search request
+      function fetchTwitterFeed(callback, q) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(data) {
+          if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+              var data = JSON.parse(xhr.responseText);
+              callback(data);
+            } else {
+              callback(null);
+            }
+          }
+        }
+        // Note that any URL fetched here must be matched by a permission in
+        // the manifest.json file!
+        var url = "http://search.twitter.com/search.json?q="+q;
+        
+        xhr.open('GET', url, true);
+        xhr.send();
+      };
+      
+      function onRequest(request, sender, callback) {
+        // Only supports the 'fetchTwitterFeed' method, although this could be
+        // generalized into a more robust RPC system.
+        if (request.action == 'fetchTwitterFeed') {
+          fetchTwitterFeed(callback, request.q);
+        }
+      };
+      
+      // Wire up the listener.
+      chrome.extension.onRequest.addListener(onRequest);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+Google Chrome extension to view google search results and twitter search results in the same page.
+
+This code is licensed under MIT license, and based heavily on:
+* my previous Greasemonkey script that did the same thing in Firefox
+* Google Chrome extension sample code, licensed under the BSD license
