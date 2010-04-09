@@ -21,7 +21,7 @@ function insertResults(data){
       r += "<li class='result'>";
       r += "<a target='_none' href='http://twitter.com/"+result.from_user+"'>"+"<strong>"+result.from_user+"</strong>"+"</a>";
       r += " ";
-      r += result.text.replace(/(\bhttp[s]?\:\/\/.*?(\s|$))/ig, "<a target='_none' href='$1'>$1</a>");
+      r += result.text.replace(/(\bhttp[s]?\:\/\/.*?(\s|$))/ig, "<a target='_none' href='$1'>$1</a>").replace(/@(\w+)/g, "<a href='http://twitter.com/$1'>$&</a>");
       r += "<div class='timestamp'>"+result.created_at+"</div>";
       r += "</li>";
 
