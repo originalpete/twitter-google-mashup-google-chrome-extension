@@ -14,7 +14,7 @@ function add_style_tag(rules) {
 // main handler to parse the results and inject into the DOM
 function insertResults(data){
   jQuery("#spinner").hide();
-  jQuery("#tsr > ol.results").append("<li><h2>Twitter results</h2></li>");
+  jQuery("#tsr > ol.results").append("<li><h2>Top matching tweets</h2></li>");
 
   jQuery.each(data.results, function(i, result) {
       var r = "";
@@ -31,27 +31,39 @@ function insertResults(data){
   });
 };
 
-// inject custom style tag into header
-var rules = "";
-rules += "#tsr {border-left: 1px solid rgb(201, 215, 241); padding-left: 10px; float: right; width: 35%;}";
-rules += "li.result {padding: 5px 10px 10px 5px;}"
-rules += "div.timestamp {color: #AAAAAA;}";
-add_style_tag(rules);
+function triggerSearch() {
+  // inject custom style tag into header
+  var rules = "";
+  rules += "#res {float: left; width: 460px;}";
+  rules += "#tsr {border-left: 1px solid rgb(201, 215, 241); padding-left: 10px; float: left; width: 250px;}";
+  rules += "li.result {padding: 5px 10px 10px 5px;}"
+  rules += "div.timestamp {color: #AAAAAA;}";
+  add_style_tag(rules);
 
-// if #mbEnd already exists then remove it
-var mbEnd = document.getElementById("mbEnd");
-if (mbEnd) mbEnd.parentNode.removeChild(mbEnd);
+  // if #mbEnd already exists then remove it
+  var mbEnd = document.getElementById("mbEnd");
+  if (mbEnd) mbEnd.parentNode.removeChild(mbEnd);
 
-// Create new div for twitter search results and append before #res
-var tsr = document.createElement("div");
-tsr.id = "tsr";
-var spinner = "<div id='spinner'><h2><img src='http://img413.imageshack.us/img413/8999/ajaxloaderbs5.gif' /> searching Twitter </h2></div>"
-tsr.innerHTML = "<ol class='results'>"+spinner+"</ol>";
-var res = document.getElementById("res");
-res.parentNode.insertBefore(tsr, res);
+  // Create new div for twitter search results and append before #res
+  var tsr = "<div id='tsr'>"
+    + "<ol class='results'>"
+    + "<div id='spinner'><h2><img src='http://img413.imageshack.us/img413/8999/ajaxloaderbs5.gif' /> searching Twitter </h2></div>"
+    + "</ol>"
+    + "</div>";
+  jQuery("#res").after(tsr);
 
-// grab the current search term
-var q = document.getElementsByName('q')[0].value.split(' ').join('+');
+  // grab the current search term
+  var q = document.getElementsByName('q')[0].value.split(' ').join('+');
 
-// fire off the twitter feed request
-chrome.extension.sendRequest({'action' : 'fetchTwitterFeed', 'q': q}, insertResults);
+  // fire off the twitter feed request
+  chrome.extension.sendRequest({'action' : 'fetchTwitterFeed', 'q': q}, insertResults);
+}
+
+// only perform twitter search for "web" google results
+var everything_li = jQuery("#leftnav ul li:first");
+console.log(everything_li);
+
+if ( everything_li.hasClass('msel') ) {
+  triggerSearch();
+}
+

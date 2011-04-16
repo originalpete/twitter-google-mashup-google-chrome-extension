@@ -1,7 +1,7 @@
 {
   "name": "Google + Twitter mashup",
-  "version": "1.2.0",
-  "description": "View Google and Twitter search results in the Google results screen",
+  "version": "1.3.1",
+  "description": "Display matching tweets when searching Google",
   "permissions": [
     "http://search.twitter.com/*"
   ],
