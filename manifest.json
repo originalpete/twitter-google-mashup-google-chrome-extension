@@ -1,15 +1,14 @@
 {
-  "name": "Google + Twitter mashup",
-  "version": "1.3.1",
+  "name": "Twitter and Google search mashup",
+  "version": "1.3.2",
   "description": "Display matching tweets when searching Google",
   "permissions": [
-    "http://search.twitter.com/*"
+    "http://search.twitter.com/"
   ],
   "background_page" : "background.html",
   "content_scripts": [
     {
-      "matches": [ "http://*/*", "https://*/*" ],
-      "include_globs": [ "http://*.google.*/search\\?*" ],
+      "matches": [ "*://*.google.com/search*", "*://*.google.co.uk/search*", "*://*.google.co.za/search*" ],
       "js" : ["jquery.min.js", "script.js"]
     }
   ]
