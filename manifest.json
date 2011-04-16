@@ -1,6 +1,6 @@
 {
   "name": "Twitter and Google search mashup",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Display matching tweets when searching Google",
   "permissions": [
     "http://search.twitter.com/"

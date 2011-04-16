@@ -34,7 +34,8 @@ function insertResults(data){
 function triggerSearch() {
   // inject custom style tag into header
   var rules = "";
-  rules += "#res {float: left; width: 460px;}";
+  rules += "#center_col {width: 800px;}";
+  rules += "#res {float: left; width: 522px;}";
   rules += "#tsr {border-left: 1px solid rgb(201, 215, 241); padding-left: 10px; float: left; width: 250px;}";
   rules += "li.result {padding: 5px 10px 10px 5px;}"
   rules += "div.timestamp {color: #AAAAAA;}";
